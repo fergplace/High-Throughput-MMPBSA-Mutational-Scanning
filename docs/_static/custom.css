@@ -1,0 +1,52 @@
+/*
+ * Custom CSS for Alabaster Theme - To increase content width
+ */
+
+/*
+ * Custom CSS for Alabaster Theme
+ * To increase content width and assure no overlap on smaller screens
+ */
+.body {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width: auto;
+}
+
+div.sphinxsidebar {
+    width: 280px;
+}
+
+@media screen and (min-width: 940px) {
+    div.documentwrapper {
+        margin-left: 20px;
+        margin-right: 0;
+    }
+}
+
+div.footer,
+div.header,
+div.relbar,
+div.bodywrapper {
+    max-width: none;
+    margin-right: 0;
+}
+
+div.document {
+    width: auto;
+    min-width: 700px;
+}
+
+#main-pipeline-title {
+    text-align: center;
+}
+
+html, body {
+    overflow-x: auto;
+    overflow-y: scroll;
+}
+
+div.footer {
+    text-align: left;
+}

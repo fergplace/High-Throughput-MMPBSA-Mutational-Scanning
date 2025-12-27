@@ -1,0 +1,22 @@
+source leaprc.protein.ff19SB
+source leaprc.water.opc
+set default PBRadii mbondi2
+
+com = loadpdb 6m0j_noHet.pdb
+ligand = loadpdb 6m0j_noHet_ligand.pdb
+rcp = loadpdb 6m0j_noHet_recpt.pdb
+
+saveamberparm com 6m0j_noHet.prmtop 6m0j_noHet.inpcrd
+saveamberparm ligand 6m0j_noHet_ligand.prmtop 6m0j_noHet_ligand.inpcrd
+saveamberparm rcp 6m0j_noHet_recpt.prmtop 6m0j_noHet_recpt.inpcrd
+com_md = loadpdb 6m0j_noHet.pdb
+solvatebox com_md OPCBOX 12.0
+addIons2 com_md Na+ 0
+saveamberparm com_md 6m0j_noHet_solvated.prmtop 6m0j_noHet_solvated.inpcrd
+
+com_mut = loadpdb 6m0j_noHet_I472A.pdb
+ligand_mut = loadpdb 6m0j_noHet_I472A_ligand.pdb
+
+saveamberparm com_mut 6m0j_noHet_I472A.prmtop 6m0j_noHet_I472A.inpcrd
+saveamberparm ligand_mut 6m0j_noHet_I472A_ligand.prmtop 6m0j_noHet_I472A_ligand.inpcrd
+quit

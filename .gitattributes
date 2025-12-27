@@ -1,0 +1,7 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+convert_notebooks.py merge=ours
+docs_maker/ merge=ours
+docs/ merge=ours
+Makefile merge=ours
+ruff.toml merge=ours

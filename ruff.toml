@@ -1,0 +1,17 @@
+[lint]
+select = ["E", "F", "I"] # "ANN"
+
+
+ignore = [
+    "F403", #Modeller import stuff 
+    "E701", #amberparm formatting...(I don't want to mess with Ali's code for the opt radii)
+    "F405", #Modeller import stuff
+    "F821", #AmberParm import stuff
+    "F541" , #f for later revs, plan on making use of these f strings
+    "F841", # leave amber path handle as is
+    "E501", # leaving line length alone.
+    ]
+
+[format]
+quote-style = "double"
+indent-style = "space"

@@ -1,0 +1,512 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Methods: Binding Free Energy Calculation &#8212; HTMS in Amber 0.1.2 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="_static/documentation_options.js?v=92734c54"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["\\(", "\\)"], ["$", "$"]], "displayMath": [["\\[", "\\]"], ["$$", "$$"]], "processEscapes": true, "packages": {"[+]": ["ams", "color", "physics", "cancel", "extpfeil", "mhchem", "ams", "braket", "unicode"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Method_Overview';</script>
+    <link rel="canonical" href="https://fergplace.github.io/HTMS_Amber/Method_Overview.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="HTMS Amber Examples" href="examples.html" />
+    <link rel="prev" title="Alanine Scanning" href="how_to_run.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">HTMS in Amber</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="getting_started.html">
+    Getting Started HTMS
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="HTMS_Amber.html">
+    HTMS_Amber package
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/fergplace/HTMS_Amber" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="getting_started.html">
+    Getting Started HTMS
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="HTMS_Amber.html">
+    HTMS_Amber package
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/fergplace/HTMS_Amber" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">User Guides</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="how_to_install.html">HTMS_Amber: High-Throughput Mutational Scanning Pipeline with mmpbsa.py</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="how_to_run.html">Alanine Scanning</a></li>
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Methods: Binding Free Energy Calculation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">HTMS Amber Examples</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="getting_started.html" class="nav-link">Getting Started HTMS</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Methods: Binding Free Energy Calculation</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="methods-binding-free-energy-calculation">
+<h1>Methods: Binding Free Energy Calculation<a class="headerlink" href="#methods-binding-free-energy-calculation" title="Link to this heading">#</a></h1>
+<section id="binding-free-energy-decomposition">
+<h2>1. Binding Free Energy Decomposition<a class="headerlink" href="#binding-free-energy-decomposition" title="Link to this heading">#</a></h2>
+<p>The Binding Free Energy (BFE) of a complex is determined by the change in enthalpy (<span class="math notranslate nohighlight">\(\Delta H\)</span>) and entropy (<span class="math notranslate nohighlight">\(\Delta S\)</span>) at a given temperature (<span class="math notranslate nohighlight">\(T\)</span>):</p>
+<div class="math notranslate nohighlight">
+\[\Delta G_{\text{bind}} = \Delta H - T\Delta S\]</div>
+<p><img alt="png" src="_images/MMPBSA_dia_smoll.drawio.png" /></p>
+<p>In a computational framework, <span class="math notranslate nohighlight">\(\Delta G_{\text{bind}}\)</span> is estimated using a thermodynamic cycle that relates the vacuum binding energy to the solvation free energies of the complex, receptor, and ligand:</p>
+<div class="math notranslate nohighlight">
+\[\Delta G_{\text{bind, solv}}^{\circ} = \Delta G_{\text{bind, vacuum}}^{\circ} + \Delta G_{\text{complex}}^{\circ} - (\Delta G_{\text{ligand}}^{\circ} + \Delta G_{\text{receptor}}^{\circ})\]</div>
+<p><img alt="png" src="_images/MMPBSA_dia_clean.drawio.png" /></p>
+<p>The solvation term (<span class="math notranslate nohighlight">\(\Delta G_{\text{solv}}^{\circ}\)</span>) is split into polar and non-polar components, while the vacuum term accounts for molecular mechanics energy (<span class="math notranslate nohighlight">\(\Delta E_{\text{MM}}\)</span>) and configurational entropy (<span class="math notranslate nohighlight">\((T\Delta S)^*\)</span>):</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\Delta G_{\text{solv}}^{\circ} = \Delta G_{\text{polar}}^{\circ} + \Delta G_{\text{non-polar}}^{\circ}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\Delta G_{\text{vacuum}}^{\circ} = \Delta E_{\text{MM}} - (T\Delta S)^*\)</span></p></li>
+</ul>
+</section>
+<section id="mm-pb-gb-sa-framework">
+<h2>2. MM/PB(GB)SA Framework<a class="headerlink" href="#mm-pb-gb-sa-framework" title="Link to this heading">#</a></h2>
+<p>The MM/PB(GB)SA approach is an all-atom end-point method. It calculates the average BFE over a set of uncorrelated snapshots extracted from a Molecular Dynamics (MD) simulation trajectory.</p>
+<p>This study utilizes a <strong>single-trajectory protocol</strong>, where the average BFE is determined by:</p>
+<div class="math notranslate nohighlight">
+\[\Delta G_{\text{bind}} = \langle G_{\text{complex, i}} - G_{\text{protein, i}} - G_{\text{ligand, i}} \rangle_i\]</div>
+<p><img alt="png" src="_images/MMPBSA_dia_snapsdrawio.png" /></p>
+<section id="solvation-free-energy-components">
+<h3>Solvation Free Energy Components<a class="headerlink" href="#solvation-free-energy-components" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Polar Component:</strong> Calculated using either the <strong>Poisson-Boltzmann (PB)</strong> method (a grid-based numerical solution) or the <strong>Generalized Born (GB)</strong> model (an analytical approximation). While PB is often more accurate, GB models (like GB5 and GBNSR6/GB66) are preferred for large systems due to computational efficiency.</p></li>
+<li><p><strong>Non-Polar Component:</strong> Estimated based on the Solvent-Accessible Surface Area (SASA): <span class="math notranslate nohighlight">\(\Delta G_{\text{nonpolar}} = \gamma * SASA\)</span>.</p></li>
+<li><p><strong>Entropy:</strong> Omitted in this study. Localized single-residue mutations typically result in minimal entropic changes compared to the significant enthalpic contributions observed in Deep Mutational Scanning (DMS).</p></li>
+</ul>
+</section>
+</section>
+<section id="gas-phase-energy-and-atomic-radii">
+<h2>3. Gas-Phase Energy and Atomic Radii<a class="headerlink" href="#gas-phase-energy-and-atomic-radii" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Force Field:</strong> Calculations use <strong>ff19SB</strong> in AMBER23, optimized for the <strong>OPC</strong> water model.</p></li>
+<li><p><strong>Atomic Radii:</strong> Implicit solvent predictions are highly sensitive to the Dielectric Boundary. We evaluate three sets: <strong>Mbondi2</strong>, <strong>OPT1</strong> (optimized for polar <span class="math notranslate nohighlight">\(\Delta \Delta G\)</span>), and <strong>OPT5D</strong> (optimized for both solvation and binding errors).</p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="how_to_run.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Alanine Scanning</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="examples.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">HTMS Amber Examples</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#binding-free-energy-decomposition">1. Binding Free Energy Decomposition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mm-pb-gb-sa-framework">2. MM/PB(GB)SA Framework</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solvation-free-energy-components">Solvation Free Energy Components</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gas-phase-energy-and-atomic-radii">3. Gas-Phase Energy and Atomic Radii</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025, Fergus Place.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
